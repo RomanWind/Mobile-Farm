@@ -8,8 +8,6 @@ public class PlotsSelection : MonoBehaviour, IPointerClickHandler
 
 	public void OnPointerClick(PointerEventData eventData)
 	{
-		Debug.Log("random click");
-		
 		if (_selectedPlot != null)
 		{
 			Plot plot = _selectedPlot.GetComponent<Plot>();

@@ -5,12 +5,6 @@ using UnityEngine.EventSystems;
 
 public class Plot : MonoBehaviour, IPointerClickHandler
 {
-	[SerializeField] private GameObject _selectionImage;
-	[SerializeField] private PlotsSelection _plotsSelection;
-
-	private State _state;
-	private float growingTimer;
-
 	public enum State
 	{
 		Empty,
@@ -19,9 +13,19 @@ public class Plot : MonoBehaviour, IPointerClickHandler
 		Ready
 	}
 
+	[SerializeField] private GameObject _selectionImage;
+	[SerializeField] private GameObject _seeds;
+	[SerializeField] private GameObject _plantObject;
+	[SerializeField] private Plant _plant;
+	[SerializeField] private PlotsSelection _plotsSelection;
+
+	private State _state;
+	private float _growingTimer;
+
 	private void Start()
 	{
 		_state = State.Empty;
+		_plant = _plantObject.GetComponent<Plant>();
 	}
 
 	private void Update()
@@ -31,7 +35,9 @@ public class Plot : MonoBehaviour, IPointerClickHandler
 			case State.Empty:
 				break; 
 			case State.Growing:
-				growingTimer += Time.deltaTime;
+				_plantObject.SetActive(true);
+				_growingTimer += Time.deltaTime;
+				_plant.PlantGrowthProgress(_growingTimer);
 			break;
 		}
 	}
@@ -39,6 +45,7 @@ public class Plot : MonoBehaviour, IPointerClickHandler
 	public void OnPointerClick(PointerEventData eventData)
 	{
 		SelectPlot();
+		ShowSeedsMenu();
 	}
 
 	private void SelectPlot()
@@ -63,9 +70,20 @@ public class Plot : MonoBehaviour, IPointerClickHandler
 		}
 	}
 
+	private void ShowSeedsMenu()
+	{
+		if (_state == State.Empty)
+		{
+			_seeds.SetActive(true);
+		}
+	}
+
 	public void UnselectPlot()
 	{
+		_seeds.SetActive(false);
 		_selectionImage.SetActive(false);
-		_state = State.Empty;
+		_plotsSelection.ResetSelectedPlot();
 	}
+
+	public void StateChange(State state) => _state = state;
 }
