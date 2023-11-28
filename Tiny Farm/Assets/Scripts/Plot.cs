@@ -1,5 +1,3 @@
-using System;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -10,17 +8,21 @@ public class Plot : MonoBehaviour, IPointerClickHandler
 		Empty,
 		Growing,
 		NeedWater,
+		Dead,
 		Ready
 	}
 
 	[SerializeField] private GameObject _selectionImage;
 	[SerializeField] private GameObject _seeds;
+	[SerializeField] private GameObject _watering;
 	[SerializeField] private GameObject _plantObject;
 	[SerializeField] private Plant _plant;
 	[SerializeField] private PlotsSelection _plotsSelection;
 
 	private State _state;
 	private float _growingTimer;
+	private float _growingTimerPause;
+	private float _wateringTimer = 5f;
 
 	private void Start()
 	{
@@ -38,6 +40,12 @@ public class Plot : MonoBehaviour, IPointerClickHandler
 				_plantObject.SetActive(true);
 				_growingTimer += Time.deltaTime;
 				_plant.PlantGrowthProgress(_growingTimer);
+			break;
+			case State.NeedWater:
+				_wateringTimer -= Time.deltaTime;
+				_watering.SetActive(true);
+				if( _wateringTimer <= 0 ) 
+					_state = State.Dead;
 			break;
 		}
 	}
