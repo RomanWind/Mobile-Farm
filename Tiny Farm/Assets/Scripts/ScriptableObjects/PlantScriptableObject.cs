@@ -4,4 +4,5 @@ using UnityEngine;
 public class PlantScriptableObject : ScriptableObject
 {
 	public Sprite[] growthStages = new Sprite[4];
+	public Sprite dryPlant;
 }

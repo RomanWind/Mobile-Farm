@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -21,8 +22,8 @@ public class Plot : MonoBehaviour, IPointerClickHandler
 
 	private State _state;
 	private float _growingTimer;
-	private float _growingTimerPause;
-	private float _wateringTimer = 5f;
+	private bool _growingPause = false;
+	private bool _plantWasWatered = false;
 
 	private void Start()
 	{
@@ -38,22 +39,44 @@ public class Plot : MonoBehaviour, IPointerClickHandler
 				break; 
 			case State.Growing:
 				_plantObject.SetActive(true);
-				_growingTimer += Time.deltaTime;
+
+				if (!_growingPause)
+					_growingTimer += Time.deltaTime;
+
+				if(!_plantWasWatered)
+				{
+					switch (Convert.ToInt32(_growingTimer))
+					{
+						case 5:
+							_growingPause = true;
+							_state = State.NeedWater;
+							break;
+					}
+				}
+
 				_plant.PlantGrowthProgress(_growingTimer);
 			break;
 			case State.NeedWater:
-				_wateringTimer -= Time.deltaTime;
 				_watering.SetActive(true);
-				if( _wateringTimer <= 0 ) 
-					_state = State.Dead;
 			break;
+			case State.Dead:
+				_watering.SetActive(false);
+				_plant.PlantDryingOut();
+				break;
+			case State.Ready:
+
+				break;
 		}
 	}
 
 	public void OnPointerClick(PointerEventData eventData)
 	{
-		SelectPlot();
+		if(_state != State.NeedWater && _state != State.Dead)
+			SelectPlot();
+
 		ShowSeedsMenu();
+		WaterThePlant();
+		RemoveDeadPlant();
 	}
 
 	private void SelectPlot()
@@ -83,6 +106,28 @@ public class Plot : MonoBehaviour, IPointerClickHandler
 		if (_state == State.Empty)
 		{
 			_seeds.SetActive(true);
+		}
+	}
+
+	private void WaterThePlant()
+	{
+		if(_state == State.NeedWater)
+		{
+			_watering.SetActive(false);
+			_growingPause = false;
+			_plantWasWatered = true;
+			_state = State.Growing;
+		}
+	}
+
+	private void RemoveDeadPlant()
+	{
+		if (_state == State.Dead)
+		{
+			_plantObject.SetActive(false);
+			_growingTimer = 0f;
+			_growingPause = false;
+			_state = State.Empty;
 		}
 	}
 

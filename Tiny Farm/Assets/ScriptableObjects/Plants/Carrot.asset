@@ -17,3 +17,4 @@ MonoBehaviour:
   - {fileID: -374965405, guid: 84f3f5e2374f4e44e8d6a737f95aa95e, type: 3}
   - {fileID: 1271671275, guid: 84f3f5e2374f4e44e8d6a737f95aa95e, type: 3}
   - {fileID: -752516213, guid: 84f3f5e2374f4e44e8d6a737f95aa95e, type: 3}
+  dryPlant: {fileID: 21300000, guid: c7873e40de64cc84f9322cd60d13af58, type: 3}

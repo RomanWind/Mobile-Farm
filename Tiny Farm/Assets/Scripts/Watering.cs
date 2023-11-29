@@ -16,8 +16,6 @@ public class Watering : MonoBehaviour
 		{
 			_waterDropsImages[i] = _waterDrops[i].GetComponent<Image>();
 		}
-
-		Debug.Log("Awake");
 	}
 
 	private void OnEnable()

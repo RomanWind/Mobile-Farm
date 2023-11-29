@@ -8,9 +8,13 @@ public class Plant : MonoBehaviour
 	private SpriteRenderer _currentPlantSprite;
 	private PlantScriptableObject _currentPlant;
 
-	private void Start()
+	private void Awake()
 	{
-		_currentPlantSprite = gameObject.GetComponent<SpriteRenderer>();
+		_currentPlantSprite = GetComponent<SpriteRenderer>();
+	}
+
+	private void OnEnable()
+	{
 		_currentPlantSprite.sprite = _currentPlant.growthStages[0];
 	}
 
@@ -18,8 +22,6 @@ public class Plant : MonoBehaviour
 
 	public void PlantGrowthProgress(float growthTime)
 	{
-		Debug.Log($"PlantGrowthProgress and growthTime: {Convert.ToInt32(growthTime)}");
-
 		switch (Convert.ToInt32(growthTime))
 		{
 			case 3:
@@ -33,5 +35,10 @@ public class Plant : MonoBehaviour
 				_plot.StateChange(Plot.State.Ready);
 				break;
 		}
+	}
+
+	public void PlantDryingOut()
+	{
+		_currentPlantSprite.sprite = _currentPlant.dryPlant;
 	}
 }

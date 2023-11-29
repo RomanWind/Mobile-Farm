@@ -2968,6 +2968,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _watering: {fileID: 207537906}
+  _plot: {fileID: 434059441}
 --- !u!95 &165004588
 Animator:
   serializedVersion: 4
@@ -3079,6 +3080,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _watering: {fileID: 207537906}
+  _plot: {fileID: 434059441}
 --- !u!95 &166351644
 Animator:
   serializedVersion: 4
@@ -3330,6 +3332,7 @@ GameObject:
   - component: {fileID: 194632238}
   - component: {fileID: 194632237}
   - component: {fileID: 194632239}
+  - component: {fileID: 194632240}
   m_Layer: 0
   m_Name: Plant
   m_TagString: Untagged
@@ -3417,6 +3420,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _plot: {fileID: 434059441}
+--- !u!95 &194632240
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 194632236}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f3e9cf22b3b68c74486f4f4859088297, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &207537900
 GameObject:
   m_ObjectHideFlags: 0
@@ -5126,6 +5149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _watering: {fileID: 207537906}
+  _plot: {fileID: 434059441}
 --- !u!1 &580249024
 GameObject:
   m_ObjectHideFlags: 0
@@ -5372,6 +5396,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _watering: {fileID: 207537906}
+  _plot: {fileID: 434059441}
 --- !u!95 &816406966
 Animator:
   serializedVersion: 4
@@ -9553,6 +9578,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _watering: {fileID: 207537906}
+  _plot: {fileID: 434059441}
 --- !u!95 &1691346183
 Animator:
   serializedVersion: 4
